@@ -1,0 +1,23 @@
+export interface InnerWindowStyle {
+    position: string,
+    textAlign: string,
+    border: string,
+    width: string,
+    height: string,
+    resize: string,
+    overflow: string,
+    borderTopLeftRadius: string,
+    borderTopRightRadius: string,
+    maxWidth: string,
+    maxHeight: string,
+    margin: string,
+    backgroundColor: string,
+    borderColor: string,
+    fontFamily: string,
+    color: string,
+    left: number,
+    top: number,
+    zoom: string,
+    cursor: string,
+    boxShadow: string
+}
