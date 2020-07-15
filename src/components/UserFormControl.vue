@@ -13,6 +13,9 @@
           :y="parseInt(control.style.top)"
           :parent="true"
           @resizing="(x,y,width,height)=>onResize(control,x,y,width,height)"
+          @dragstop="(left, top) => dragstop(control, left, top)"
+          @deactivated="onDeactivated"
+          @activated="onActivated(modal,control)"
         >
           <CustomLabel v-if="control.type==='Label'" :control="control" :modal="modal" />
           <CustomButton v-if="control.type==='CommandButton'" :control="control" :modal="modal" />
@@ -26,6 +29,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 import CustomLabel from "./CustomLabel.vue";
 import CustomButton from "./CustomButton.vue";
 import VueDraggableResizable from "vue-draggable-resizable";
+import { Mutation, Getter } from "vuex-class";
 
 @Component({
   components: {
@@ -42,17 +46,33 @@ export default class UserFormControl extends Vue {
     position: "absolute",
     backgroundColor: ""
   };
- 
+  @Mutation userFormIndex!: Function;
+  @Getter getUserFormIndex!: any;
+  @Getter getControlIndex!: any;
+  @Mutation controlIndex!: any;
+  @Mutation resizeStyle!: any;
+  @Mutation dragStyle!: any;
   mounted() {
     console.log("mounted", this.modal);
   }
-   onResize(control: object, x: number, y: number, width: number, height: number): void {
-     console.log("jjjjjjjjjjjj")
-    /*   control.style.width = `${width}px`;
-      control.style.height = `${height}px`;
-      control.style.left = `${x}px`;
-      control.style.top = `${y}px`; */
-    }
+  onResize(control: object, x: number, y: number, width: number, height: number): void {
+    this.userFormIndex(this.modal);
+    this.controlIndex(control);
+    this.resizeStyle({
+      width: `${width}px`,
+      height: `${height}px`,
+      left: `${x}px`,
+      top: `${y}px`
+    });
+  }
+  dragstop(control: any, x: number, y: number): void  {
+    this.userFormIndex(this.modal);
+    this.controlIndex(control);
+    this.dragStyle({
+      left: `${x}px`,
+      top: `${y}px`
+    });
+  }
 }
 </script>
 

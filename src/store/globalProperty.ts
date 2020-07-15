@@ -17,7 +17,8 @@ export const getters: GetterTree<any, any> = {
 
 export const mutations: MutationTree<any> =
 {
-    updatePrevModalZIndex: state => state.prevModalZIndex = state.prevModalZIndex + 1
+    updatePrevModalZIndex: state => state.prevModalZIndex = state.prevModalZIndex + 1,
+    updateSelectedControl: (state, tool)=> state.selectedControl= tool
 
 }
 

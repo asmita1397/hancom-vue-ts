@@ -23,7 +23,7 @@
           <hr />
 
           <div>
-            <TreeBrowser  @onClick="nodeWasClicked" style="cursor:pointer;" />
+            <TreeBrowser   style="cursor:pointer;" />
             <hr />
 
            <!--  <UserFormPropertiesList /> -->

@@ -103,10 +103,13 @@ export default class Header extends Vue {
   @Mutation addUserForm!: Function;
   @Mutation addtreeBrowserData!: Function;
   @Mutation updatePrevModalZIndex!: any;
-
+  
   handleAddUserForm(): void {
+   
+ /*  
+  
     console.log("hi", this.getTreeBrowserData.length);
-    console.log("kkkkkk", this.prevModalZIndex);
+    console.log("kkkkkk", this.prevModalZIndex); */
     this.updatePrevModalZIndex();
     const userForm = {
       ...this.getUserForm,

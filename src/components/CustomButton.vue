@@ -4,7 +4,7 @@
       v-if="control"
       :id="control.id"
       :key="control.id"
-      @mousedown="customInputClick()"
+      @mousedown="customButtonClick"
       :style="control.style"
       :title="control.title"
       :tabindex="control.tabindex"
@@ -18,6 +18,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Getter, Mutation } from 'vuex-class';
 
 @Component({
     
@@ -25,5 +26,18 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 export default class CustomLabel extends Vue {
   @Prop() private control!: object;
   @Prop() private modal!: object;
+
+  @Getter getPrevControlIndex!: any;
+  @Mutation userFormIndex!: Function;
+  @Mutation updatePrevControlIndex!: Function;
+  @Mutation controlIndex!: Function;
+  @Mutation updateControlIndex!: Function
+  customButtonClick() {
+    console.log("clickd");
+    this.userFormIndex(this.modal);
+    this.controlIndex(this.control);
+    this.updatePrevControlIndex();
+    this.updateControlIndex(this.getPrevControlIndex);
+  }
 }
 </script>

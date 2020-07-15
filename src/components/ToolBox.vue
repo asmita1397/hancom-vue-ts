@@ -39,7 +39,7 @@
                         @click="handleClick"
                         v-bind:style="{
                     
-                    'border-style': isActive === 'select' ? 'inset' : '',
+                    'border-style': selectedControl === 'select' ? 'inset' : '',
                   }"
                         src="https://img.icons8.com/android/24/000000/cursor.png"
                       />
@@ -53,7 +53,7 @@
                         @click="handleClick"
                         v-bind:style="{
                     
-                    'border-style': isActive === 'label' ? 'inset' : '',
+                    'border-style': selectedControl === 'label' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/ios-filled/50/000000/a.png"
@@ -68,7 +68,7 @@
                         @click="handleClick"
                         v-bind:style="{
                     
-                    'border-style': isActive === 'textbox' ? 'inset' : '',
+                    'border-style': selectedControl === 'textbox' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/dotty/80/000000/text-input-form.png"
@@ -83,9 +83,9 @@
                         @click="handleClick"
                         v-bind:style="{
                     'background-color':
-                      isActive === 'combobox' ? '#5e99f7' : '',
+                      selectedControl === 'combobox' ? '#5e99f7' : '',
                     'border-style':
-                      isActive === 'combobox' ? 'inset' : '',
+                      selectedControl === 'combobox' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/windows/32/000000/box-other.png"
@@ -99,8 +99,8 @@
                         name="listbox"
                         @click="handleClick"
                         v-bind:style="{
-                    'background-color': isActive === 'listbox' ? '#5e99f7' : '',
-                    'border-style': isActive === 'listbox' ? 'inset' : '',
+                    'background-color': selectedControl === 'listbox' ? '#5e99f7' : '',
+                    'border-style': selectedControl === 'listbox' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/metro/26/000000/add-list.png"
@@ -115,9 +115,9 @@
                         @click="handleClick"
                         v-bind:style="{
                     'background-color':
-                      isActive === 'checkbox' ? '#5e99f7' : '',
+                      selectedControl === 'checkbox' ? '#5e99f7' : '',
                     'border-style':
-                      isActive === 'checkbox' ? 'inset' : '',
+                      selectedControl === 'checkbox' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/metro/26/000000/check-all.png"
@@ -132,9 +132,9 @@
                         @click="handleClick"
                         v-bind:style="{
                     'background-color':
-                      isActive === 'optionbutton' ? '#5e99f7' : '',
+                      selectedControl === 'optionbutton' ? '#5e99f7' : '',
                     'border-style':
-                      isActive === 'optionbutton' ? 'inset' : '',
+                      selectedControl === 'optionbutton' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/material-sharp/24/000000/unchecked-radio-button.png"
@@ -149,9 +149,9 @@
                         @click="handleClick"
                         v-bind:style="{
                     'background-color':
-                      isActive === 'togglebutton' ? '#5e99f7' : '',
+                      selectedControl === 'togglebutton' ? '#5e99f7' : '',
                     'border-style':
-                      isActive === 'togglebutton' ? 'inset' : '',
+                      selectedControl === 'togglebutton' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/material-sharp/24/000000/toggle-on.png"
@@ -165,8 +165,8 @@
                         name="frame"
                         @click="handleClick"
                         v-bind:style="{
-                    'background-color': isActive === 'frame' ? '#5e99f7' : '',
-                    'border-style': isActive === 'frame' ? 'inset' : '',
+                    'background-color': selectedControl === 'frame' ? '#5e99f7' : '',
+                    'border-style': selectedControl === 'frame' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/android/24/000000/frame.png"
@@ -181,9 +181,9 @@
                         @click="handleClick"
                         v-bind:style="{
                     'background-color':
-                      isActive === 'commandbutton' ? '#5e99f7' : '',
+                      selectedControl === 'commandbutton' ? '#5e99f7' : '',
                     'border-style':
-                      isActive === 'commandbutton' ? 'inset' : '',
+                      selectedControl === 'commandbutton' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/metro/24/000000/run-command.png"
@@ -198,9 +198,9 @@
                         @click="handleClick"
                         v-bind:style="{
                     'background-color':
-                      isActive === 'tabstrip' ? '#5e99f7' : '',
+                      selectedControl === 'tabstrip' ? '#5e99f7' : '',
                     'border-style':
-                      isActive === 'tabstrip' ? 'inset' : '',
+                      selectedControl === 'tabstrip' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/ios-filled/50/000000/tab.png"
@@ -215,9 +215,9 @@
                         @click="handleClick"
                         v-bind:style="{
                     'background-color':
-                      isActive === 'multipage' ? '#5e99f7' : '',
+                      selectedControl === 'multipage' ? '#5e99f7' : '',
                     'border-style':
-                      isActive === 'multipage' ? 'inset' : '',
+                      selectedControl === 'multipage' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/dotty/80/000000/tab.png"
@@ -232,9 +232,9 @@
                         @click="handleClick"
                         v-bind:style="{
                     'background-color':
-                      isActive === 'scrollbar' ? '#5e99f7' : '',
+                      selectedControl === 'scrollbar' ? '#5e99f7' : '',
                     'border-style':
-                      isActive === 'scrollbar' ? 'inset' : '',
+                      selectedControl === 'scrollbar' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/ios/50/000000/circled-up-2.png"
@@ -249,9 +249,9 @@
                         @click="handleClick"
                         v-bind:style="{
                     'background-color':
-                      isActive === 'spinbutton' ? '#5e99f7' : '',
+                      selectedControl === 'spinbutton' ? '#5e99f7' : '',
                     'border-style':
-                      isActive === 'spinbutton' ? 'inset' : '',
+                      selectedControl === 'spinbutton' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/android/24/000000/sorting-arrows.png"
@@ -265,8 +265,8 @@
                         name="image"
                         @click="handleClick"
                         v-bind:style="{
-                    'background-color': isActive === 'image' ? '#5e99f7' : '',
-                    'border-style': isActive === 'image' ? 'inset' : '',
+                    'background-color': selectedControl === 'image' ? '#5e99f7' : '',
+                    'border-style': selectedControl === 'image' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/material-outlined/24/000000/image.png"
@@ -280,8 +280,8 @@
                         name="refedit"
                         @click="handleClick"
                         v-bind:style="{
-                    'background-color': isActive === 'refedit' ? '#5e99f7' : '',
-                    'border-style': isActive === 'refedit' ? 'inset' : '',
+                    'background-color': selectedControl === 'refedit' ? '#5e99f7' : '',
+                    'border-style': selectedControl === 'refedit' ? 'inset' : '',
                   }"
                         class="img"
                         src="https://img.icons8.com/material-outlined/24/000000/edit-property.png"
@@ -300,27 +300,77 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { Mutation, Getter } from 'vuex-class';
+import VueResizable from "vue-resizable"
 @Component({
-   
-  })
+   components: { VueResizable }
+})
 export default class ToolBox extends Vue {
   // @Prop() private msg!: string;
-   positions={
-        clientX: undefined,
-        clientY: undefined,
-        movementX: 0,
-        movementY: 0
+
+
+  @Getter selectedControl!: string
+  
+  positions: any = {
+    clientX: '',
+    clientY: '',
+    movementX: 0,
+    movementY: 0
+  };
+ 
+  isClose = false;
+  handlers = ["r", "rb", "b", "lb", "l", "lt", "t", "rt"];
+  style = { left: "559px", top: "307px", height: "170px", width: "330px" };
+
+
+ @Mutation updateSelectedControl!: Function
+
+ mounted()
+  {
+   
+    console.log("selectedControl",this.selectedControl);
+    
+  }
+  handleClose(): void {
+    this.isClose = true;
+  }
+  handleClick(e: any): void {
+    console.log("hii",e.target.name)
+    this.updateSelectedControl(e.target.name)
+  }
+  dragMouseDown(event: any): void {
+      event.preventDefault();
+      this.positions.clientX = event.clientX;
+      this.positions.clientY = event.clientY;
+      document.onmousemove = this.elementDrag;
+      document.onmouseup = this.closeDragElement;
+    }
+  elementDrag(event: any): void {
+      event.preventDefault();
+      this.positions.movementX = this.positions.clientX - event.clientX;
+      this.positions.movementY = this.positions.clientY - event.clientY;
+      this.positions.clientX = event.clientX;
+      this.positions.clientY = event.clientY;
+      if (
+       ((this.$refs.resizableComponent as Vue).$el as HTMLInputElement).offsetLeft > 0 &&
+       ((this.$refs.resizableComponent as Vue).$el as HTMLInputElement).offsetTop > 0
+      ) {
+        this.style.top = ((this.$refs.resizableComponent as Vue).$el as HTMLInputElement).offsetTop - this.positions.movementY + "px";
+
+        this.style.left = ((this.$refs.resizableComponent as Vue).$el as HTMLInputElement).offsetLeft-this.positions.movementX +"px";
+      } else {
+        this.style.top = "307px";
+        this.style.left = "559px";
       }
-      isActive= ""
-      isClose=false
-      handlers= ["r", "rb", "b", "lb", "l", "lt", "t", "rt"]
-      style= { left: "559px", top: "307px", height: "170px", width: "330px" }
+  }
+  closeDragElement(): void {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
 }
 
-
-/* import VueResizable from "vue-resizable";
+/*;
 import { EventBus } from "./event-bus.js";
 export default {
   name: "DraggableDiv",
@@ -348,55 +398,8 @@ export default {
     setIsClose() {
       return this.isClose;
     },
-    eHandler(data) {
-      this.style.width = `${data.width}px`;
-      this.style.height = `${data.height}px`;
-      this.style.left = `${data.left}px`;
-      this.style.top = `${data.top}px`;
-      this.event = data.eventName;
-    },
-    dragMouseDown: function(event) {
-      event.preventDefault();
-      this.positions.clientX = event.clientX;
-      this.positions.clientY = event.clientY;
-      document.onmousemove = this.elementDrag;
-      document.onmouseup = this.closeDragElement;
-    },
-    elementDrag: function(event) {
-      event.preventDefault();
-      this.positions.movementX = this.positions.clientX - event.clientX;
-      this.positions.movementY = this.positions.clientY - event.clientY;
-      this.positions.clientX = event.clientX;
-      this.positions.clientY = event.clientY;
-      if (
-        this.$refs.resizableComponent.$el.offsetTop > 0 &&
-        this.$refs.resizableComponent.$el.offsetLeft > 0
-      ) {
-        this.style.top =
-          this.$refs.resizableComponent.$el.offsetTop -
-          this.positions.movementY +
-          "px";
-
-        this.style.left =
-          this.$refs.resizableComponent.$el.offsetLeft -
-          this.positions.movementX +
-          "px";
-      } else {
-        this.style.top = "307px";
-        this.style.left = "559px";
-      }
-    },
-    closeDragElement() {
-      document.onmouseup = null;
-      document.onmousemove = null;
-    },
-    handleClick(e) {
-      this.isActive = e.target.name;
-      this.$emit("selectedTool", e.target.name);
-    },
-    handleClose() {
-      this.isClose = true;
-    }
+    
+   
   }
 }; */
 </script>
