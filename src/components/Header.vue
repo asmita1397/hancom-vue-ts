@@ -106,10 +106,6 @@ export default class Header extends Vue {
   
   handleAddUserForm(): void {
    
- /*  
-  
-    console.log("hi", this.getTreeBrowserData.length);
-    console.log("kkkkkk", this.prevModalZIndex); */
     this.updatePrevModalZIndex();
     const userForm = {
       ...this.getUserForm,
@@ -120,12 +116,11 @@ export default class Header extends Vue {
         ...this.getUserForm.outerWindowStyle,
         container: {
           ...this.getUserForm.outerWindowStyle.container,
-          zIndex:this.prevModalZIndex
+          zIndex:this.prevModalZIndex.toString()
         }
       }
     };
-   /*  console.log(userForm);
-    this.addUserForm(userForm); */
+  
     this.addtreeBrowserData(userForm);
   }
 }

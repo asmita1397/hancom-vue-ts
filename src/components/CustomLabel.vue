@@ -7,7 +7,7 @@
       :title="control.title"
       :tabindex="control.tabindex"
       :style="control.style"
-      @mousedown:stop="customLabelClick"
+      @mousedown.stop="customLabelClick"
       :v-model="control.caption"
       :value="control.caption"
       :disabled="!control.enabled"

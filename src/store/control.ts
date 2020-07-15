@@ -1,9 +1,9 @@
 import { GetterTree, MutationTree, ActionTree } from 'vuex'
-import labelControl from '../models/labelControl.json'
-import commandButtonControl from "../models/commandButtonControl.json";
+import {Label} from '../models/Label'
+import {CommandButton} from "../models/CommandButton";
 export const state: any = {
-    labelControl: labelControl,
-    commandButtonControl: commandButtonControl
+    labelControl: Label,
+    commandButtonControl: CommandButton
 
 
 }

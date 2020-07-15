@@ -1,7 +1,10 @@
 import { GetterTree, MutationTree, ActionTree } from 'vuex'
-import treeUserFormData from '../models/treeUserFormData.json'
+import { treeData } from '../models/TreeData'
+
+
+
 export const state: any = {
-  treeBrowserData: treeUserFormData,
+  treeBrowserData: treeData,
   useFormIdIndex: -1,
   controlIdIndex: -1
 }
@@ -14,12 +17,13 @@ export const getters: GetterTree<any, any> = {
   getControlIndex: state => state.controlIdIndex,
   getPrevControlIndex: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controlZIndex,
 
-  
+
 }
 
 export const mutations: MutationTree<any> =
 {
   addtreeBrowserData: (state, userForm) => {
+    /* const userFormData = state.treeBrowserData.userForms[0].userForms */
     state.treeBrowserData.userForms[0].userForms.push(userForm)
   },
   closeWindow: (state, userForm) => {
@@ -66,10 +70,55 @@ export const mutations: MutationTree<any> =
 
 
 
+
+
+
 export const actions: ActionTree<any, any> = {
+
+  addtreeBrowserData: ({ commit }, userForm) => {
+    commit('addtreeBrowserData', userForm)
+  },
+  closeWindow: ({ commit }, userForm) => {
+    commit('closeWindow', userForm)
+  },
+  userFormIndex: ({ commit }, userForm) => {
+    commit('userFormIndex', userForm)
+  },
+  controlIndex: ({ commit }, control) => {
+    commit('controlIndex', control)
+  },
+  resizeStyle: ({ commit }, controlStyle) => {
+    commit('resizeStyle', controlStyle)
+  },
+  dragStyle: ({ commit }, controlStyle) => {
+    commit('dragStyle', controlStyle)
+
+  },
+  addControl: ({ commit }, control) => {
+    commit('addControl', control)
+
+  },
+  dragOuterWindow: ({ commit }, userForm) => {
+    commit('dragOuterWindow', userForm)
+
+  },
+  makeActive: ({ commit }, userFormZIndex) => {
+    commit('makeActive', userFormZIndex)
+
+  },
+  updatePrevControlIndex: ({ commit }) => {
+    commit('updatePrevControlIndex')
+
+  },
+  updateControlIndex: ({ commit }, controlIndex) => {
+    commit('updateControlIndex', controlIndex)
+
+  }
+
 
 
 }
+
 
 
 

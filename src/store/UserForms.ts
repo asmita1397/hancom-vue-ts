@@ -1,7 +1,7 @@
 import { GetterTree, MutationTree, ActionTree } from 'vuex'
-import userFromJson from '../models/userForm.json'
+import {userFormData} from '../models/UserFormData'
 export const state: any = {
-    userForms: userFromJson
+    userForms: userFormData
 
 }
 

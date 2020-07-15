@@ -301,7 +301,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { Mutation, Getter } from 'vuex-class';
+import { Mutation, Getter, Action } from 'vuex-class';
 import VueResizable from "vue-resizable"
 @Component({
    components: { VueResizable }
@@ -324,7 +324,7 @@ export default class ToolBox extends Vue {
   style = { left: "559px", top: "307px", height: "170px", width: "330px" };
 
 
- @Mutation updateSelectedControl!: Function
+ @Action updateSelectedControl!: Function
 
  mounted()
   {
@@ -370,38 +370,7 @@ export default class ToolBox extends Vue {
     }
 }
 
-/*;
-import { EventBus } from "./event-bus.js";
-export default {
-  name: "DraggableDiv",
-  components: { VueResizable },
-  data: function() {
-    return {
-      positions: {
-        clientX: undefined,
-        clientY: undefined,
-        movementX: 0,
-        movementY: 0
-      },
-      isActive: "",
-      isClose: false,
-      handlers: ["r", "rb", "b", "lb", "l", "lt", "t", "rt"],
-      style: { left: "559px", top: "307px", height: "170px", width: "330px" },
-      event: "",
-      dragSelector: ".drag-container-1, .drag-container-2"
-    };
-  },
-  mounted() {
-    EventBus.$on("setIsActive", tool => (this.isActive = tool));
-  },
-  methods: {
-    setIsClose() {
-      return this.isClose;
-    },
-    
-   
-  }
-}; */
+
 </script>
 
 <style scoped>

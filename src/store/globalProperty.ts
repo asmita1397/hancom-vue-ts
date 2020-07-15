@@ -24,6 +24,14 @@ export const mutations: MutationTree<any> =
 
 export const actions: ActionTree<any, any> = {
 
+    updatePrevModalZIndex: ({commit})=>
+    {
+        commit('updatePrevModalZIndex')
+    },
+    updateSelectedControl: ({commit},tool) =>
+    {
+        commit('updateSelectedControl',tool)
+    }
 
 }
 

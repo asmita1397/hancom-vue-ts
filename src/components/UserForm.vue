@@ -106,9 +106,9 @@ export default class UserForm extends Vue {
 
     /*  console.log("------------------",this.$refs[this.modalName][0].offsetLeft-this.positions.movementX+"px") */
     const top =
-      this.$refs[this.modalName][0].offsetTop - this.positions.movementY + "px";
+      (this as any).$refs[this.modalName][0].offsetTop - this.positions.movementY + "px";
     const left =
-      this.$refs[this.modalName][0].offsetLeft -
+       (this as any).$refs[this.modalName][0].offsetLeft -
       this.positions.movementX +
       "px";
     this.dragOuterWindow({ top: top, left: left });
@@ -184,7 +184,7 @@ export default class UserForm extends Vue {
   }
   handleMouseUp(modal: string) {
     const dragRef = "dragselector".concat(modal);
-    this.selectedAreaStyle = this.$refs[dragRef][0].selectAreaStyle;
+    this.selectedAreaStyle = (this as any).$refs[dragRef][0].selectAreaStyle;
    
   }
 }
