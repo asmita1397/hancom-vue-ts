@@ -23,8 +23,10 @@ export const getters: GetterTree<any, any> = {
 export const mutations: MutationTree<any> =
 {
   addtreeBrowserData: (state, userForm) => {
-    /* const userFormData = state.treeBrowserData.userForms[0].userForms */
-    state.treeBrowserData.userForms[0].userForms.push(userForm)
+    state.treeBrowserData.userForms[0].userForms = [
+      ... state.treeBrowserData.userForms[0].userForms,
+      userForm
+    ];
   },
   closeWindow: (state, userForm) => {
     const userFormIndex = state.treeBrowserData.userForms[0].userForms.findIndex((val: any) => val.id === userForm.id)
@@ -48,7 +50,10 @@ export const mutations: MutationTree<any> =
 
   },
   addControl: (state, control) => {
-    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.push(control)
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls = [
+      ...state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls,
+      control
+    ];
   },
   dragOuterWindow: (state, userForm) => {
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].outerWindowStyle.container.top = userForm.top
