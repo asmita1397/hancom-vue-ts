@@ -119,7 +119,9 @@ export default class UserForm extends Vue {
   }
 
   createTool(e: any, modal: any) {
+    console.log("===============================================================")
     this.userFormIndex(modal);
+
     if (this.selectedControl === "label") {
       console.log("labl");
       const tool = {
