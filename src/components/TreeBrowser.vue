@@ -22,53 +22,46 @@
 
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { Getter } from 'vuex-class';
+import { Component, Vue, Prop } from "vue-property-decorator";
+import { Mutation, Getter } from "vuex-class";
 
 @Component({})
-export default class TreeBrowse extends Vue {
-  expanded = false;
+export default class TreeBrowser extends Vue {
+  @Prop() node!: any;
+
+  @Getter prevModalZIndex!: any;
+
+  @Mutation updatePrevModalZIndex!: any;
+  @Mutation userFormIndex!: Function;
+  @Mutation makeActive!: Function;
+  @Mutation updateSelect!: any;
+  @Mutation updateSelectedUserForm!: any;
+  @Mutation displayUserForm!: any;
+
   depth: object = {
     type: 0,
     default: 0
   };
+  expanded = false;
 
-  @Getter getRoot!: Function
-  @Prop() node: any = this.getRoot;
-}
-
-/* export default {
-  name: "TreeBrowser",
-  props: {
-    node: Object,
-    depth: {
-      type: Number,
-      default: 0
-    }
-  },
-  components: {
-    // Prop
-  },
-  data() {
-    return {
-      expanded: false
-    };
-  },
-  methods: {
-    nodeClicked() {
-      this.expanded = !this.expanded;
-      if (!this.hasChildren) {
-        this.$emit("onClick", this.node);
-      }
-    }
-  },
-  computed: {
-    hasChildren() {
-      return this.node.userForms;
+  mounted() {
+    this.updateSelect(true);
+  }
+  nodeClicked() {
+    this.expanded = !this.expanded;
+    if (!this.hasChildren) {
+      this.$emit("onClick", this.node);
     }
   }
-}; */
+
+  
+  get hasChildren() {
+    return this.node.userForms;
+  }
+}
 </script>
+
+
 
 <style scoped>
 .tree {
@@ -92,4 +85,3 @@ ul {
   cursor: pointer;
 }
 </style>
-

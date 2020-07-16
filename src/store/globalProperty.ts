@@ -1,5 +1,5 @@
 import { GetterTree, MutationTree, ActionTree } from 'vuex'
-import userFromJson from '../models/userForm.json'
+
 export const state: any = {
     selectedUserForm: {},
     selectedControl: "",
@@ -17,20 +17,20 @@ export const getters: GetterTree<any, any> = {
 
 export const mutations: MutationTree<any> =
 {
+    updateSelectedUserForm: (state, userForm) => state.selectedUserForm = userForm,
+    updateSelectedControl: (state, tool) => state.selectedControl = tool,
     updatePrevModalZIndex: state => state.prevModalZIndex = state.prevModalZIndex + 1,
-    updateSelectedControl: (state, tool)=> state.selectedControl= tool
+    updateSelect: (state, isSelect) => state.selected = isSelect,
 
 }
 
 export const actions: ActionTree<any, any> = {
 
-    updatePrevModalZIndex: ({commit})=>
-    {
+    updatePrevModalZIndex: ({ commit }) => {
         commit('updatePrevModalZIndex')
     },
-    updateSelectedControl: ({commit},tool) =>
-    {
-        commit('updateSelectedControl',tool)
+    updateSelectedControl: ({ commit }, tool) => {
+        commit('updateSelectedControl', tool)
     }
 
 }

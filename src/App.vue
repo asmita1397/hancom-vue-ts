@@ -2,7 +2,7 @@
   <div id="app">
     <div class="container">
       <div class="header">
-        <Header  />
+        <Header />
         <hr class="hr" />
       </div>
       <div class="mainbody">
@@ -10,7 +10,7 @@
         <div class="sidenav">
           <div class="sideheader">
             <span class="sideheader1">
-              Project - VBAProject 
+              Project - VBAProject {{counter}}
               <button style="float:right">
                 <b>X</b>
               </button>
@@ -23,17 +23,16 @@
           <hr />
 
           <div>
-            <TreeBrowser   style="cursor:pointer;" />
+            <TreeBrowser :node="getRoot" @onClick="nodeWasClicked" style="cursor:pointer;" />
             <hr />
 
-           <!--  <UserFormPropertiesList /> -->
+            <UserFormPropertiesList />
           </div>
         </div>
         <div class="right">
-        
           <UserForm />
 
-           <ToolBox />
+          <ToolBox />
         </div>
       </div>
     </div>
@@ -41,30 +40,66 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue } from "vue-property-decorator";
 import UserForm from "./components/UserForm.vue";
-import {State,Getter} from 'vuex-class';
+import { State, Getter, Mutation } from "vuex-class";
 import Header from "./components/Header.vue";
 import TreeBrowser from "./components/TreeBrowser.vue";
-import ToolBox from './components/ToolBox.vue'
+import ToolBox from "./components/ToolBox.vue";
+import UserFormPropertiesList from "./components/UserFormPropertiesList.vue";
 @Component({
   components: {
     UserForm,
     Header,
     TreeBrowser,
-    ToolBox
-  },
+    ToolBox,
+    UserFormPropertiesList
+  }
 })
 export default class App extends Vue {
-     /*  initialUserForm: initialUserFormData,
-      selectedUserForm: object= {};
-      selectedControl: string= "";
-      prevModalZIndex: string="";
-      root: Object = treeUserFormData;
-      selected: boolean= false */
-  @State('userForms') userForms: any
-  @Getter getUserForm: any
-  @Getter getTreeBrowserData: any
+  
+  @State("userForms") userForms: any;
+  @Getter getUserForm: any;
+  @Getter getRoot!: any;
+  @Getter getTreeBrowserData: any;
+
+  @Getter prevModalZIndex: any;
+  @Mutation userFormIndex: any;
+  @Mutation displayUserForm: any;
+  @Mutation updatePrevModalZIndex: any;
+  @Mutation makeActive: any;
+
+  @Getter selectedUserForm!: any;
+  @Getter selected!: any
+
+  @Mutation updateSelect: any;
+  @Mutation updateSelectedUserForm: any;
+
+  make(modal: any): void {
+    this.userFormIndex(modal);
+    this.updatePrevModalZIndex();
+    this.makeActive(this.prevModalZIndex);
+    this.displayUserForm();
+  }
+  nodeWasClicked(node: any) {
+    this.updateSelect(true);
+    this.updateSelectedUserForm(node);
+    this.make(node);
+    console.log(this.selected)
+  }
+
+  /* 
+  nodeWasClicked(node) {
+      
+      EventBus.$emit(
+        "userFormClicked",
+        this.selectedUserForm,
+        this.selectedUserForm
+      );
+    }, */
+  mounted() {
+    console.log(this.getRoot);
+  }
 }
 </script>
 
@@ -109,7 +144,7 @@ hr {
 .left {
   left: 0;
   height: 100%;
-  width: 30%;
+  width: 40%;
   position: fixed;
   z-index: 1;
   overflow-x: hidden;

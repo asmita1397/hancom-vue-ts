@@ -12,7 +12,7 @@ export const state: any = {
 
 export const getters: GetterTree<any, any> = {
   getTreeBrowserData: state => state.treeBrowserData.userForms[0].userForms,
-  getRoot: state => state,
+  getRoot: state => state.treeBrowserData,
   getUserFormIndex: state => state.useFormIdIndex,
   getControlIndex: state => state.controlIdIndex,
   getPrevControlIndex: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controlZIndex,
@@ -24,7 +24,7 @@ export const mutations: MutationTree<any> =
 {
   addtreeBrowserData: (state, userForm) => {
     state.treeBrowserData.userForms[0].userForms = [
-      ... state.treeBrowserData.userForms[0].userForms,
+      ...state.treeBrowserData.userForms[0].userForms,
       userForm
     ];
   },
@@ -68,8 +68,12 @@ export const mutations: MutationTree<any> =
   },
   updateControlIndex: (state, controlIndex) => {
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex].style.zIndex = controlIndex.toString()
-  }
+  },
+  displayUserForm: (state) => {
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].outerWindowStyle.container.display = "block"
 
+
+  }
 
 }
 
