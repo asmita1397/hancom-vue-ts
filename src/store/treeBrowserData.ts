@@ -15,14 +15,15 @@ export const getters: GetterTree<any, any> = {
   getUserFormIndex: state => state.useFormIdIndex,
   getControlIndex: state => state.controlIdIndex,
   getPrevControlIndex: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controlZIndex,
-  getSelectedUserForm: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex]
+  getSelectedUserForm: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex],
+  getSelectedControl: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex]
 
 }
 
 export const mutations: MutationTree<any> =
 {
   addtreeBrowserData: (state, userForm) => {
-    /*  console.log( "===================",getroprtyState.getters) */
+   
     state.treeBrowserData.userForms[0].userForms = [
       ...state.treeBrowserData.userForms[0].userForms,
       userForm
@@ -78,6 +79,12 @@ export const mutations: MutationTree<any> =
   updatedInnerWindowStyle: (state, updatedStyle) => {
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].innerWindowStyle.container[updatedStyle.styleName] = updatedStyle.styleValue
   },
+  updateControl: (state, updatedStyle) => {
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex][updatedStyle.styleName] = updatedStyle.styleValue
+  },
+  updateControlStyle: (state, updatedStyle) => {
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex].style[updatedStyle.styleName] = updatedStyle.styleValue
+  }
 
 
 
