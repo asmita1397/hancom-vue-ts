@@ -158,7 +158,7 @@ hr {
   right: 0;
   background-color: #80888e;
   height: 100%;
-  width:77%;
+  width:70%;
   position: fixed;
   z-index: 1;
   overflow-x: hidden;

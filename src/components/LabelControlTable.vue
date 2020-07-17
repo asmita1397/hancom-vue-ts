@@ -8,13 +8,13 @@
       <tr>
         <td>(Name)</td>
         <td>
-          <input type="text" :value="selectedUserForm.name" @input="nameValidate" />
+          <input type="text" :value="selectedUserForm.name" />
         </td>
       </tr>
       <tr>
         <td>Accelerator</td>
         <td>
-          <input type="text" :value="selectedUserForm.accelerator" @input="acceleratorValidate" />
+          <input type="text" :value="selectedUserForm.accelerator" />
         </td>
       </tr>
       <tr>
@@ -110,11 +110,7 @@
       <tr>
         <td>HelpContextId</td>
         <td>
-          <input
-            type="number"
-            :value="selectedUserForm.helpContextId"
-            @input="helpContextIdValidate"
-          />
+          <input type="number" :value="selectedUserForm.helpContextId" />
         </td>
       </tr>
       <tr>
@@ -167,7 +163,7 @@
       <tr>
         <td>TabIndex</td>
         <td>
-          <input type="number" :value="selectedUserForm.tabindex" @input="tabIndexValidate" />
+          <input type="number" :value="selectedUserForm.tabindex" />
         </td>
       </tr>
       <tr>
@@ -266,90 +262,36 @@ export default class UserFormTable extends Vue {
   picturePosition: object = picturePosition;
   textAlign: object = textAlign;
 
-
   filters: any = {
     sizeFilter(value: any) {
       return parseInt(value, 10);
     }
   };
-
-  
-  nameValidate() {}
+  autoSizeChange(e: any) {
+    if (e.target.value) {
+      this.selectedUserForm.style.overflowWrap = "break-word";
+    } else {
+      this.selectedUserForm.style.overflowWrap = "normal";
+    }
+  }
+  handleEnabled(data: boolean) {
+      if (data) {
+        this.selectedUserForm.style.color = "black";
+      } else {
+        this.selectedUserForm.style.color = "#DCDCDC";
+      }
+    }
+  wordWrapChange(event: any) {
+    if (event.target.value === "true") {
+      this.selectedUserForm.style.wordWrap = "break-word";
+      this.selectedUserForm.style.whiteSpace = "normal";
+    } else {
+      this.selectedUserForm.style.wordWrap = "normal";
+      this.selectedUserForm.style.whiteSpace = "nowrap";
+    }
+  }
 }
 
-// export default {
-//   props: ["selectedUserForm"],
-//   data() {
-//     return {
-//       validators: validators,
-//       backColor: backColor,
-//       backStyle: backStyle,
-//       borderColor: borderColor,
-//       borderStyle: borderStyle,
-//       font: font,
-//       foreColor: foreColor,
-//       mousePointer: mousePointer,
-//       picturePosition: picturePosition,
-//       specialEffect: specialEffect,
-//       textAlign: textAlign
-//     };
-//   },
-//   filters: {
-//     sizeFilter(value) {
-//       return parseInt(value, 10);
-//     }
-//   },
-//   methods: {
-//     nameValidate() {
-//       //1st letter alphabet
-//     },
-//     acceleratorValidate() {
-//       // Only first character
-//     },
-//     heightValidate() {
-//       // 7 digits
-//     },
-//     helpContextIdValidate() {
-//       // <2147000000
-//     },
-//     leftValidate() {
-//       //7digits
-//     },
-//     topValidate() {
-//       //7 digits
-//     },
-//     widthValidate() {
-//       //7 digits
-//     },
-//     tabIndexValidate() {
-//       //number of controls
-//     },
-
-//     handleEnabled(data) {
-//       if (data) {
-//         this.selectedUserForm.style.color = "black";
-//       } else {
-//         this.selectedUserForm.style.color = "#DCDCDC";
-//       }
-//     },
-//     autoSizeChange(e) {
-//       if (e.target.value) {
-//         this.selectedUserForm.style.overflowWrap = "break-word";
-//       } else {
-//         this.selectedUserForm.style.overflowWrap = "normal";
-//       }
-//     },
-//     wordWrapChange(event) {
-//       if (event.target.value === "true") {
-//         this.selectedUserForm.style.wordWrap = "break-word";
-//         this.selectedUserForm.style.whiteSpace = "normal";
-//       } else {
-//         this.selectedUserForm.style.wordWrap = "normal";
-//         this.selectedUserForm.style.whiteSpace = "nowrap";
-//       }
-//     }
-//   }
-// };
 </script>
 
 

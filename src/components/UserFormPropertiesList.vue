@@ -32,10 +32,7 @@
 
       <UserFormTable v-if="selectedOption.type==='UserForm'" :selectedUserForm="selectedUserForm" />
       <LabelControlTable v-if="selectedOption.type==='Label'" :selectedUserForm="selectedOption" />
-      <!--<CommandButtonControl
-        v-if="selectedOption.type==='CommandButton'"
-        :selectedUserForm="selectedOption"
-      />-->
+      <CommandButtonControl v-if="selectedOption.type==='CommandButton'" :selectedUserForm="selectedOption"/>
     </div>
   </div>
 </template>
@@ -46,12 +43,13 @@ import { Getter } from "vuex-class";
 import { EventBus } from "./event-bus";
 import UserFormTable from "./UserFormTable.vue";
 import LabelControlTable from "./LabelControlTable.vue";
+import CommandButtonControl from "./CommandButtonControl.vue";
 @Component({
-  components: { UserFormTable,LabelControlTable }
+  components: { UserFormTable, LabelControlTable, CommandButtonControl}
 })
 export default class UserFormPropertiesList extends Vue {
- /*  @Getter selectedUserForm!: any; */
-  selectedUserForm = {}
+  /*  @Getter selectedUserForm!: any; */
+  selectedUserForm = {};
   selectedOption = {};
 
   mounted() {

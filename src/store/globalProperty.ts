@@ -20,8 +20,7 @@ export const getters: GetterTree<any, any> = {
 export const mutations: MutationTree<any> =
 {
     updateSelectedUserForm: (state, userForm) => {
-        state.selectedUserForm = userForm
-        state.selectedUserForm.caption="usrForm11" 
+        state.selectedUserForm = userForm 
     },
     updateSelectedControl: (state, tool) => state.selectedControl = tool,
     updatePrevModalZIndex: state => state.prevModalZIndex = state.prevModalZIndex + 1,

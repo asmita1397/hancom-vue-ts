@@ -101,8 +101,9 @@
           <input
             type="number"
             v-model="selectedUserForm.helpContextId"
-            @change="helpContextIdValidate(selectedUserForm.helpContextId)"
+           
           />
+          <!--  @change="helpContextIdValidate(selectedUserForm.helpContextId)" -->
         </td>
       </tr>
       <tr>
@@ -376,7 +377,7 @@ ChangeInput(e: any, styleName: string)
     }
   }
 
-  helpContextIdValidate(data: any) {
+  helpContextIdValidate(data: any): void {
     if (data > 2147000000) {
       this.selectedUserForm.helpContextId = this.previoushelpContextId;
     }

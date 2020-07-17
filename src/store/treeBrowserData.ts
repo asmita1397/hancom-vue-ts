@@ -73,11 +73,9 @@ export const mutations: MutationTree<any> =
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].outerWindowStyle.container.display = "block"
   },
   updateStyle: (state, updatedStyle) => {
-    console.log(state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex])
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex][updatedStyle.styleName] = updatedStyle.styleValue
   },
   updatedInnerWindowStyle: (state, updatedStyle) => {
-    console.log("o---------------",state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].innerWindowStyle.container[updatedStyle.styleName])
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].innerWindowStyle.container[updatedStyle.styleName] = updatedStyle.styleValue
   },
 
