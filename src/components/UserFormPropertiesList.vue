@@ -31,8 +31,8 @@
       </select>
 
       <UserFormTable v-if="selectedOption.type==='UserForm'" :selectedUserForm="selectedUserForm" />
-      <!--<LabelControlTable v-if="selectedOption.type==='Label'" :selectedUserForm="selectedOption" />
-      <CommandButtonControl
+      <LabelControlTable v-if="selectedOption.type==='Label'" :selectedUserForm="selectedOption" />
+      <!--<CommandButtonControl
         v-if="selectedOption.type==='CommandButton'"
         :selectedUserForm="selectedOption"
       />-->
@@ -43,20 +43,21 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Getter } from "vuex-class";
-import { EventBus } from "./event-bus.js";
+import { EventBus } from "./event-bus";
 import UserFormTable from "./UserFormTable.vue";
+import LabelControlTable from "./LabelControlTable.vue";
 @Component({
-  components: { UserFormTable }
+  components: { UserFormTable,LabelControlTable }
 })
 export default class UserFormPropertiesList extends Vue {
-  @Getter selectedUserForm!: any;
-
-  selectedOption = "";
+ /*  @Getter selectedUserForm!: any; */
+  selectedUserForm = {}
+  selectedOption = {};
 
   mounted() {
     EventBus.$on("userFormClicked", (control: object, userForm: object) => {
-      /* this.selectedOption = control;
-      this.selectedUserForm = userForm; */
+      this.selectedOption = control;
+      this.selectedUserForm = userForm;
     });
   }
 
@@ -65,8 +66,6 @@ export default class UserFormPropertiesList extends Vue {
     EventBus.$emit("selectedControlOption", selectedUserForm, selectedOption);
   }
 }
-
-
 </script>
 
 

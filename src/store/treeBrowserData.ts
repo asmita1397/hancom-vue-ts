@@ -2,7 +2,6 @@ import { GetterTree, MutationTree, ActionTree } from 'vuex'
 import { treeData } from '../models/TreeData'
 
 
-
 export const state: any = {
   treeBrowserData: treeData,
   useFormIdIndex: -1,
@@ -16,13 +15,14 @@ export const getters: GetterTree<any, any> = {
   getUserFormIndex: state => state.useFormIdIndex,
   getControlIndex: state => state.controlIdIndex,
   getPrevControlIndex: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controlZIndex,
-
+  getSelectedUserForm: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex]
 
 }
 
 export const mutations: MutationTree<any> =
 {
   addtreeBrowserData: (state, userForm) => {
+    /*  console.log( "===================",getroprtyState.getters) */
     state.treeBrowserData.userForms[0].userForms = [
       ...state.treeBrowserData.userForms[0].userForms,
       userForm
@@ -71,9 +71,17 @@ export const mutations: MutationTree<any> =
   },
   displayUserForm: (state) => {
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].outerWindowStyle.container.display = "block"
+  },
+  updateStyle: (state, updatedStyle) => {
+    console.log(state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex])
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex][updatedStyle.styleName] = updatedStyle.styleValue
+  },
+  updatedInnerWindowStyle: (state, updatedStyle) => {
+    console.log("o---------------",state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].innerWindowStyle.container[updatedStyle.styleName])
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].innerWindowStyle.container[updatedStyle.styleName] = updatedStyle.styleValue
+  },
 
 
-  }
 
 }
 

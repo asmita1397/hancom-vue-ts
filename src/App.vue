@@ -10,7 +10,7 @@
         <div class="sidenav">
           <div class="sideheader">
             <span class="sideheader1">
-              Project - VBAProject {{counter}}
+              Project - VBAProject 
               <button style="float:right">
                 <b>X</b>
               </button>
@@ -47,6 +47,7 @@ import Header from "./components/Header.vue";
 import TreeBrowser from "./components/TreeBrowser.vue";
 import ToolBox from "./components/ToolBox.vue";
 import UserFormPropertiesList from "./components/UserFormPropertiesList.vue";
+import { EventBus } from "./components/event-bus";
 @Component({
   components: {
     UserForm,
@@ -86,16 +87,18 @@ export default class App extends Vue {
     this.updateSelectedUserForm(node);
     this.make(node);
     console.log(this.selected)
+    
+    EventBus.$emit(
+        "userFormClicked",
+        this.selectedUserForm,
+        this.selectedUserForm
+      );
   }
 
   /* 
   nodeWasClicked(node) {
       
-      EventBus.$emit(
-        "userFormClicked",
-        this.selectedUserForm,
-        this.selectedUserForm
-      );
+     
     }, */
   mounted() {
     console.log(this.getRoot);
@@ -155,7 +158,7 @@ hr {
   right: 0;
   background-color: #80888e;
   height: 100%;
-  width: 77%;
+  width:77%;
   position: fixed;
   z-index: 1;
   overflow-x: hidden;

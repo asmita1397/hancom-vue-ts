@@ -1,5 +1,7 @@
 import { GetterTree, MutationTree, ActionTree } from 'vuex'
+import store from './index'
 
+/* console.log("stor", store) */
 export const state: any = {
     selectedUserForm: {},
     selectedControl: "",
@@ -17,7 +19,10 @@ export const getters: GetterTree<any, any> = {
 
 export const mutations: MutationTree<any> =
 {
-    updateSelectedUserForm: (state, userForm) => state.selectedUserForm = userForm,
+    updateSelectedUserForm: (state, userForm) => {
+        state.selectedUserForm = userForm
+        state.selectedUserForm.caption="usrForm11" 
+    },
     updateSelectedControl: (state, tool) => state.selectedControl = tool,
     updatePrevModalZIndex: state => state.prevModalZIndex = state.prevModalZIndex + 1,
     updateSelect: (state, isSelect) => state.selected = isSelect,

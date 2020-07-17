@@ -47,6 +47,7 @@ import { Component, Vue } from "vue-property-decorator";
 import { State, Getter, Mutation } from "vuex-class";
 import UserFormControl from "./UserFormControl.vue";
 import OuterWindowButton from "./OuterWindowButton.vue";
+import { EventBus } from "./event-bus";
 @Component({
   components: {
     UserFormControl,
@@ -76,13 +77,38 @@ export default class UserForm extends Vue {
   };
 
   mounted() {
-    /* console.log(this.getLabelControl);
-    console.log(this.getCommandButtonControl); */
-    console.log(this.$refs);
+    EventBus.$on(
+      "selectedControlOption",
+      (selectedForm: any, selectedControlOption: any) => {
+        let userFormControlRef: any = this.$refs;
+
+        for (let key in userFormControlRef) {
+          if (
+            key === selectedForm.name &&
+            selectedControlOption.type !== "UserForm"
+          ) {
+            for (
+              let i = 0;
+              i < userFormControlRef[key][0].$children.length;
+              i++
+            ) {
+              if (
+                userFormControlRef[key][0].$children[i].$attrs.id ===
+                selectedControlOption.id
+              ) {
+                userFormControlRef[key][0].$children[i].active = true;
+              } else {
+                userFormControlRef[key][0].$children[i].active = false;
+              }
+            }
+          }
+        }
+      }
+    );
   }
   make(modal: any): void {
     this.userFormIndex(modal);
-    this.updatePrevModalZIndex()
+    this.updatePrevModalZIndex();
     console.log("mak activ");
 
     this.makeActive(this.prevModalZIndex);
@@ -106,9 +132,11 @@ export default class UserForm extends Vue {
 
     /*  console.log("------------------",this.$refs[this.modalName][0].offsetLeft-this.positions.movementX+"px") */
     const top =
-      (this as any).$refs[this.modalName][0].offsetTop - this.positions.movementY + "px";
+      (this as any).$refs[this.modalName][0].offsetTop -
+      this.positions.movementY +
+      "px";
     const left =
-       (this as any).$refs[this.modalName][0].offsetLeft -
+      (this as any).$refs[this.modalName][0].offsetLeft -
       this.positions.movementX +
       "px";
     this.dragOuterWindow({ top: top, left: left });
@@ -119,7 +147,9 @@ export default class UserForm extends Vue {
   }
 
   createTool(e: any, modal: any) {
-    console.log("===============================================================")
+    console.log(
+      "==============================================================="
+    );
     this.userFormIndex(modal);
 
     if (this.selectedControl === "label") {
@@ -180,14 +210,12 @@ export default class UserForm extends Vue {
       };
       console.log("tool", tool);
       this.addControl(tool);
-      
     }
     this.updateSelectedControl("select");
   }
   handleMouseUp(modal: string) {
     const dragRef = "dragselector".concat(modal);
     this.selectedAreaStyle = (this as any).$refs[dragRef][0].selectAreaStyle;
-   
   }
 }
 </script>

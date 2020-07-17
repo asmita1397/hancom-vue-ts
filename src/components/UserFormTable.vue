@@ -8,13 +8,13 @@
       <tr>
         <td>(Name)</td>
         <td>
-          <input type="text" v-model="selectedUserForm.name" @input="nameValidate" />
+          <input type="text" :value="getSelectedUserForm.name"  @change="e=>handleChangeInput(e,'name')"/>
         </td>
       </tr>
       <tr>
         <td>BackColor</td>
         <td>
-          <select v-model="selectedUserForm.innerWindowStyle.container.backgroundColor">
+          <select v-model="getSelectedUserForm.innerWindowStyle.container.backgroundColor" >
             <option v-for="(item,key) in backColor" :key="key" :value="item">{{key}}</option>
           </select>
         </td>
@@ -79,7 +79,7 @@
       <tr>
         <td>ForeColor</td>
         <td>
-          <select v-model="selectedUserForm.innerWindowStyle.container.color">
+          <select :value="getSelectedUserForm.innerWindowStyle.container.color" @change="ChangeInput($event,'color')">
             <option v-for="(item,key) in foreColor" :key="key" :value="item">{{key}}</option>
           </select>
         </td>
@@ -192,26 +192,26 @@
       <tr>
         <td>ScrollHeight</td>
         <td>
-          <input type="number" :value="selectedUserForm.scrollHeight" @input="scrollHeightValidate" />
+          <input type="number" :value="selectedUserForm.scrollHeight"  />
         </td>
       </tr>
       <tr>
         <td>ScrollLeft</td>
         <td>
-          <input type="number" :value="selectedUserForm.scrollLeft" @input="scrollLeftValidate" />
+          <input type="number" :value="selectedUserForm.scrollLeft" />
         </td>
       </tr>
       <tr>
         <td>ScrollTop</td>
         <td>
-          <input type="number" :value="selectedUserForm.scrollTop" @input="scrollTopValidate" />
+          <input type="number" :value="selectedUserForm.scrollTop"  />
         </td>
       </tr>
 
       <tr>
         <td>ScrollWidth</td>
         <td>
-          <input type="number" :value="selectedUserForm.scrollWidth" @input="scrollWidthValidate" />
+          <input type="number" :value="selectedUserForm.scrollWidth"  />
         </td>
       </tr>
       <tr>
@@ -318,8 +318,11 @@ import scrollBars from "../models/scrollBars.json";
 import specialEffect from "../models/specialEffect.json";
 import startUpPosition from "../models/startUpPosition.json";
 import pictureSizeMode from "../models/pictureSizeMode.json";
-import { validators } from "../validators/validator";
+import { validators } from "../validators/validator.js";
+import { Getter, Mutation } from 'vuex-class';
 @Component({})
+
+
 export default class UserFormTable extends Vue {
   @Prop() selectedUserForm: any;
   validators: object = validators;
@@ -344,6 +347,27 @@ export default class UserFormTable extends Vue {
     }
   };
  
+   @Getter getSelectedUserForm!: any
+   @Mutation updateStyle!: Function
+   @Mutation updatedInnerWindowStyle!: Function
+
+   mounted()
+   {
+     console.log(this.getSelectedUserForm)
+   }
+
+handleChangeInput(e: any, styleName: string)
+{
+  this.updateStyle({styleValue:e.target.value,styleName:styleName})
+  
+}
+ChangeInput(e: any, styleName: string)
+{
+  this.updatedInnerWindowStyle({styleValue:e.target.value,styleName:styleName})
+  
+}
+
+
   drawBufferValidate(data: any) {
     if (data > 16000 && data <= 1048576) {
       this.selectedUserForm.drawBuffer = data;
