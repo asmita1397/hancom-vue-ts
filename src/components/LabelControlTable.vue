@@ -247,7 +247,13 @@ import specialEffect from "../models/specialEffect.json";
 import textAlign from "../models/textAlign.json";
 import { validators } from "../validators/validator";
 import { Mutation, Getter } from 'vuex-class';
-@Component({})
+@Component({
+  filters: {
+    sizeFilter(value: any) {
+      return parseInt(value, 10);
+    }
+  }
+})
 export default class UserFormTable extends Vue {
 
 
@@ -269,11 +275,7 @@ export default class UserFormTable extends Vue {
   @Mutation updateControl!: any 
   @Mutation updateControlStyle!: any
 
-  filters: any = {
-    sizeFilter(value: any) {
-      return parseInt(value, 10);
-    }
-  };
+  
 
   mounted()
   {

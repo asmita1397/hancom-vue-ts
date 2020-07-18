@@ -41,7 +41,13 @@ export const mutations: MutationTree<any> =
   controlIndex: (state, control) => {
     state.controlIdIndex = state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.findIndex((val: any) => val.id === control.id)
   },
+  resizeUserForm: (state, userForm) => {
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].innerWindowStyle.container.width = userForm.width
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].innerWindowStyle.container.height = userForm.height
+
+  },
   resizeStyle: (state, controlStyle) => {
+    
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex].style.width = controlStyle.width
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex].style.left = controlStyle.left
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex].style.top = controlStyle.top

@@ -12,7 +12,7 @@
           <OuterWindowButton :userForm="modal" />
         </div>
 
-        <div :style="modal.innerWindowStyle.container" v-resize>
+        <div :style="modal.innerWindowStyle.container" v-resize @resize="onResize($event,modal)">
           <div :style="modal.innerWindowStyle.top">
             <span v-bind:class="{ rightToLeft: modal.rightToLeft}">{{modal.caption}}</span>
             <button
@@ -73,6 +73,7 @@ export default class UserForm extends Vue {
   @Mutation updatePrevModalZIndex!: any;
   @Mutation updateSelectedUserForm!: any;
   @Mutation updateSelect!: any
+  @Mutation resizeUserForm!: any
 
   positions: any = {
     clientX: "",
@@ -159,6 +160,10 @@ export default class UserForm extends Vue {
     document.onmousemove = null;
   }
 
+
+    onResize(e: any, userForm: object) {
+      this.resizeUserForm(e.detail)
+    }
   createTool(e: any, modal: any) {
     this.userFormIndex(modal);
 

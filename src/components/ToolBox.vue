@@ -462,7 +462,7 @@ ul {
   cursor: default;
   display: inline-block;
   font-weight: 600;
-  float: left;
+  align-items: left;
   padding: 0.2rem 1.2rem;
   position: relative;
 }
@@ -508,12 +508,12 @@ ul {
   background-color: white;
 }
 
-.dot {
+/* .dot {
   display: inline-block;
   float: left;
   color: black;
 }
-
+ */
 .innerContainer {
   top: 36px;
   position: absolute;
@@ -529,7 +529,7 @@ ul {
 
 .content {
   display: inline-block;
-  float: left;
+  align-items: left;
 }
 
 .resizable {

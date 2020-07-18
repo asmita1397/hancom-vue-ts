@@ -321,7 +321,14 @@ import startUpPosition from "../models/startUpPosition.json";
 import pictureSizeMode from "../models/pictureSizeMode.json";
 import { validators } from "../validators/validator.js";
 import { Getter, Mutation } from 'vuex-class';
-@Component({})
+@Component({
+  
+  filters:{
+    sizeFilter(value: any) {
+      return parseInt(value, 10)
+    }
+  }
+})
 
 
 export default class UserFormTable extends Vue {
@@ -342,11 +349,8 @@ export default class UserFormTable extends Vue {
   startUpPosition: object = startUpPosition;
   previousDrawBuffer = this.selectedUserForm.drawBuffer;
   previoushelpContextId = this.selectedUserForm.helpContextId;
-  filters: any = {
-    sizeFilter(value: any) {
-      return parseInt(value, 10);
-    }
-  };
+
+
  
    @Getter getSelectedUserForm!: any
    @Mutation updateStyle!: Function
