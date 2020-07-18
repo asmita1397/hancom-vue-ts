@@ -10,6 +10,7 @@ export const state: any = {
 
 
 export const getters: GetterTree<any, any> = {
+
   getTreeBrowserData: state => state.treeBrowserData.userForms[0].userForms,
   getRoot: state => state.treeBrowserData,
   getUserFormIndex: state => state.useFormIdIndex,
@@ -17,6 +18,7 @@ export const getters: GetterTree<any, any> = {
   getPrevControlIndex: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controlZIndex,
   getSelectedUserForm: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex],
   getSelectedControl: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex]
+  
 
 }
 

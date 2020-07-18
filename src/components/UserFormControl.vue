@@ -14,7 +14,7 @@
           :parent="true"
           @resizing="(x,y,width,height)=>onResize(control,x,y,width,height)"
           @dragstop="(left, top) => dragstop(control, left, top)"
-          @activated="onActivated(modal,control)"
+       
         >
           <CustomLabel v-if="control.type==='Label'" :control="control" :modal="modal" />
           <CustomButton v-if="control.type==='CommandButton'" :control="control" :modal="modal" />

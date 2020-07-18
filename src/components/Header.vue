@@ -94,6 +94,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Mutation, Getter } from "vuex-class";
+import { EventBus } from "./event-bus";
 
 @Component({})
 export default class Header extends Vue {
@@ -103,7 +104,7 @@ export default class Header extends Vue {
   @Mutation addUserForm!: Function;
   @Mutation addtreeBrowserData!: Function;
   @Mutation updatePrevModalZIndex!: any;
-  
+  @Mutation userFormIndex!: any
   handleAddUserForm(): void {
    
     this.updatePrevModalZIndex();
@@ -122,6 +123,9 @@ export default class Header extends Vue {
     };
   
     this.addtreeBrowserData(userForm);
+    /*  this.userFormIndex(this.getTreeBrowserData.length-1) */
+    //  console.log(this.getTreeBrowserData[this.getTreeBrowserData.length-1])
+    EventBus.$emit('nodeWasClicked',this.getTreeBrowserData[this.getTreeBrowserData.length-1])
   }
 }
 </script>

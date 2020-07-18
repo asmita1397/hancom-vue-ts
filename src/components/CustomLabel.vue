@@ -21,7 +21,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { Mutation, Getter } from "vuex-class";
-
+import { EventBus } from "./event-bus";
 @Component({})
 export default class CustomLabel extends Vue {
   @Prop() private control!: object;
@@ -41,6 +41,7 @@ export default class CustomLabel extends Vue {
     this.controlIndex(this.control);
     this.updatePrevControlIndex();
     this.updateControlIndex(this.getPrevControlIndex);
+     EventBus.$emit("userFormClicked", this.control, this.modal);
   }
 }
 </script>

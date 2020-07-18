@@ -62,6 +62,8 @@ export default class UserForm extends Vue {
   @Getter getCommandButtonControl!: any;
   @Getter selectedControl!: any;
   @Getter prevModalZIndex!: any;
+  @Getter selectedUserForm!: any;
+
 
   @Mutation userFormIndex!: Function;
   @Mutation addControl!: Function;
@@ -69,6 +71,9 @@ export default class UserForm extends Vue {
   @Mutation dragOuterWindow!: Function;
   @Mutation makeActive!: Function;
   @Mutation updatePrevModalZIndex!: any;
+  @Mutation updateSelectedUserForm!: any;
+  @Mutation updateSelect!: any
+
   positions: any = {
     clientX: "",
     clientY: "",
@@ -80,9 +85,9 @@ export default class UserForm extends Vue {
     EventBus.$on(
       "selectedControlOption",
       (selectedForm: any, selectedControlOption: any) => {
-        let userFormControlRef: any = this.$refs;
+        const userFormControlRef: any = this.$refs;
 
-        for (let key in userFormControlRef) {
+        for (const key in userFormControlRef) {
           if (
             key === selectedForm.name &&
             selectedControlOption.type !== "UserForm"
@@ -107,11 +112,19 @@ export default class UserForm extends Vue {
     );
   }
   make(modal: any): void {
+   
     this.userFormIndex(modal);
     this.updatePrevModalZIndex();
     console.log("mak activ");
-
     this.makeActive(this.prevModalZIndex);
+     this.updateSelect(true);
+    this.updateSelectedUserForm(modal)
+    EventBus.$emit(
+        "userFormClicked",
+        this.selectedUserForm,
+        this.selectedUserForm
+      );
+
   }
   dragMouseDown(event: any, modal: any): void {
     this.userFormIndex(modal);
@@ -147,9 +160,6 @@ export default class UserForm extends Vue {
   }
 
   createTool(e: any, modal: any) {
-    console.log(
-      "==============================================================="
-    );
     this.userFormIndex(modal);
 
     if (this.selectedControl === "label") {

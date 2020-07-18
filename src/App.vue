@@ -76,6 +76,9 @@ export default class App extends Vue {
   @Mutation updateSelect: any;
   @Mutation updateSelectedUserForm: any;
 
+
+ 
+
   make(modal: any): void {
     this.userFormIndex(modal);
     this.updatePrevModalZIndex();
@@ -94,15 +97,13 @@ export default class App extends Vue {
         this.selectedUserForm
       );
   }
-
-  /* 
-  nodeWasClicked(node) {
-      
-     
-    }, */
   mounted() {
-    console.log(this.getRoot);
+    EventBus.$on("nodeWasClicked", ( userForm: object) => {
+        this.nodeWasClicked(userForm)
+    });
   }
+
+  
 }
 </script>
 

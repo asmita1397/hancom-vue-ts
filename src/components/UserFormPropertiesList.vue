@@ -59,6 +59,8 @@ export default class UserFormPropertiesList extends Vue {
 
   mounted() {
     EventBus.$on("userFormClicked", (control: object, userForm: object) => {
+
+      console.log("----------------------------------------------------------------------")
       this.selectedOption = control;
       this.selectedUserForm = userForm;
     });
