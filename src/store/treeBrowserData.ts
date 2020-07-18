@@ -18,14 +18,14 @@ export const getters: GetterTree<any, any> = {
   getPrevControlIndex: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controlZIndex,
   getSelectedUserForm: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex],
   getSelectedControl: state => state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex]
-  
+
 
 }
 
 export const mutations: MutationTree<any> =
 {
   addtreeBrowserData: (state, userForm) => {
-   
+
     state.treeBrowserData.userForms[0].userForms = [
       ...state.treeBrowserData.userForms[0].userForms,
       userForm
@@ -47,7 +47,7 @@ export const mutations: MutationTree<any> =
 
   },
   resizeStyle: (state, controlStyle) => {
-    
+
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex].style.width = controlStyle.width
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex].style.left = controlStyle.left
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex].style.top = controlStyle.top

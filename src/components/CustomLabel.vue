@@ -1,6 +1,8 @@
 <template>
   <div>
     <label
+      class="lbl"
+      ref="labelRef"
       v-if="control"
       :id="control.id"
       :key="control.id"
@@ -31,9 +33,7 @@ export default class CustomLabel extends Vue {
   @Mutation userFormIndex!: Function;
   @Mutation updatePrevControlIndex!: Function;
   @Mutation controlIndex!: Function;
-  @Mutation updateControlIndex!: Function
-
-
+  @Mutation updateControlIndex!: Function;
 
   customLabelClick() {
     console.log("clickd");
@@ -41,7 +41,13 @@ export default class CustomLabel extends Vue {
     this.controlIndex(this.control);
     this.updatePrevControlIndex();
     this.updateControlIndex(this.getPrevControlIndex);
-     EventBus.$emit("userFormClicked", this.control, this.modal);
+    EventBus.$emit("userFormClicked", this.control, this.modal);
   }
 }
 </script>
+<style scoped>
+/* .lbl:focus {
+  outline: none;
+  box-shadow: none;
+} */
+</style>

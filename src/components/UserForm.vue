@@ -5,7 +5,7 @@
         :style="modal.outerWindowStyle.container"
         :ref="'outrWindowDrag'.concat(modal.name)"
         @mousedown="make(modal)"
-        v-resize
+        
       >
         <div :style="modal.outerWindowStyle.top" @mousedown="dragMouseDown($event,modal)">
           <span>Book1 {{modal.name}} (UserForm)</span>
@@ -24,13 +24,14 @@
               :style="modal.innerWindowStyle.closeButton"
               src="https://img.icons8.com/fluent/48/000000/close-window.png"
             />
-          </div>
+          </div> 
           <div
+          @mouseup="handleMouseUp(modal.name)"
             :style="modal.innerWindowStyle.innerContainer"
             @click="createTool($event,modal)"
-            @mouseup="handleMouseUp(modal.name)"
+            
           >
-            <drag-selector class="drag-selector" :ref="'dragselector'.concat(modal.name)">
+            <drag-selector :ref="'dragselector'.concat(modal.name)">
               <UserFormControl :modal="modal" :ref="modal.name" />
             </drag-selector>
           </div>
@@ -144,7 +145,7 @@ export default class UserForm extends Vue {
     this.positions.clientX = event.clientX;
     this.positions.clientY = event.clientY;
 
-    /*  console.log("------------------",this.$refs[this.modalName][0].offsetLeft-this.positions.movementX+"px") */
+    
     const top =
       (this as any).$refs[this.modalName][0].offsetTop -
       this.positions.movementY +
@@ -162,7 +163,8 @@ export default class UserForm extends Vue {
 
 
     onResize(e: any, userForm: object) {
-      this.resizeUserForm(e.detail)
+      console.log(userForm)
+       this.resizeUserForm(e.detail)
     }
   createTool(e: any, modal: any) {
     this.userFormIndex(modal);
@@ -244,4 +246,19 @@ img {
   float: right;
   padding-right: 45px;
 }
+.drag-selector {
+            display: flex;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            padding: 10px;
+           
+        }
+.drag-selector1 {
+            display: flex;
+            align-content: flex-start;
+            flex-wrap: wrap;
+            padding: 10px;
+           
+
+        }
 </style>
