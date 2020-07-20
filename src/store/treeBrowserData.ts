@@ -92,8 +92,11 @@ export const mutations: MutationTree<any> =
   },
   updateControlStyle: (state, updatedStyle) => {
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex].style[updatedStyle.styleName] = updatedStyle.styleValue
+  },
+  deletingControl: (state) => {
+    console.log(state.treeBrowserData.userForms[0].userForms)
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.splice(state.controlIdIndex,1)
   }
-
 
 
 }

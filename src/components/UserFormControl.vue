@@ -14,7 +14,8 @@
           :parent="true"
           @resizing="(x,y,width,height)=>onResize(control,x,y,width,height)"
           @dragstop="(left, top) => dragstop(control, left, top)"
-       
+          @deactivated="onDeactivated"
+          @activated="onActivated(modal,control)"
         >
           <CustomLabel v-if="control.type==='Label'" :control="control" :modal="modal" />
           <CustomButton v-if="control.type==='CommandButton'" :control="control" :modal="modal" />
@@ -27,8 +28,9 @@
 import { Component, Vue, Prop } from "vue-property-decorator";
 import CustomLabel from "./CustomLabel.vue";
 import CustomButton from "./CustomButton.vue";
-import VueDraggableResizable from "vue-draggable-resizable";
+import VueDraggableResizable from "./vue-draggable-resizable.vue";
 import { Mutation, Getter } from "vuex-class";
+import { EventBus } from "./event-bus";
 
 @Component({
   components: {
@@ -38,23 +40,65 @@ import { Mutation, Getter } from "vuex-class";
   }
 })
 export default class UserFormControl extends Vue {
-  @Prop() modal!: object;
+  @Prop() modal!: any;
   parent: object = {
     width: "98%",
     height: "98%",
     position: "absolute",
     backgroundColor: ""
   };
+
+  deletingControlId: any = -1;
+  deletingUserFormId: any = -1;
+  selectedControl!: any;
   @Mutation userFormIndex!: Function;
   @Getter getUserFormIndex!: any;
   @Getter getControlIndex!: any;
   @Mutation controlIndex!: any;
   @Mutation resizeStyle!: any;
   @Mutation dragStyle!: any;
+  @Mutation deletingControl!: Function;
   mounted() {
     console.log("mounted", this.modal);
+    document.addEventListener("keydown", this.deleteSingleControl);
   }
-  onResize(control: object, x: number, y: number, width: number, height: number): void {
+
+  deleteSingleControl(e: any) {
+    if (e.keyCode === 13) {
+      if (this.deletingUserFormId !== -1 && this.deletingControlId !== -1) {
+        if (this.modal.id === this.deletingUserFormId) {
+          this.userFormIndex(this.modal);
+          this.controlIndex(this.selectedControl);
+          this.deletingControl();
+          this.deletingControlId = -1;
+          this.deletingUserFormId = -1;
+           EventBus.$emit("userFormClicked", this.modal, this.modal);
+        }
+      }
+    }
+  }
+
+  onDeactivated() {
+    this.deletingControlId = -1;
+    this.deletingUserFormId = -1;
+  }
+  onActivated(modal: any, control: any) {
+    for (let i = 0; i < modal.controls.length; i++) {
+      if (modal.controls[i].id === control.id) {
+        this.selectedControl = modal.controls[i];
+        this.deletingControlId = i;
+        this.deletingUserFormId = modal.id;
+      }
+    }
+  }
+
+  onResize(
+    control: object,
+    x: number,
+    y: number,
+    width: number,
+    height: number
+  ): void {
     this.userFormIndex(this.modal);
     this.controlIndex(control);
     this.resizeStyle({
@@ -64,7 +108,7 @@ export default class UserFormControl extends Vue {
       top: `${y}px`
     });
   }
-  dragstop(control: any, x: number, y: number): void  {
+  dragstop(control: any, x: number, y: number): void {
     this.userFormIndex(this.modal);
     this.controlIndex(control);
     this.dragStyle({
