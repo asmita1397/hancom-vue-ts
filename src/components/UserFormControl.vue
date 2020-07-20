@@ -2,7 +2,9 @@
   <div>
     <div :style="parent">
       <template>
+        <!--   -->
         <vue-draggable-resizable
+           :class-name-handle="control.isActive?'handle':''"
           :style="{zIndex:control.style.zIndex}"
           v-for="control in modal.controls"
           :key="control.id"
@@ -72,7 +74,7 @@ export default class UserFormControl extends Vue {
           this.deletingControl();
           this.deletingControlId = -1;
           this.deletingUserFormId = -1;
-           EventBus.$emit("userFormClicked", this.modal, this.modal);
+          EventBus.$emit("userFormClicked", this.modal, this.modal);
         }
       }
     }
@@ -121,4 +123,55 @@ export default class UserFormControl extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-</style>
+.handle {
+  box-sizing: border-box;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #EEE;
+  border: 1px solid #333;
+}
+.handle-tl {
+  top: -10px;
+  left: -10px;
+  cursor: nw-resize;
+}
+.handle-tm {
+  top: -10px;
+  left: 50%;
+  margin-left: -5px;
+  cursor: n-resize;
+}
+.handle-tr {
+  top: -10px;
+  right: -10px;
+  cursor: ne-resize;
+}
+.handle-ml {
+  top: 50%;
+  margin-top: -5px;
+  left: -10px;
+  cursor: w-resize;
+}
+.handle-mr {
+  top: 50%;
+  margin-top: -5px;
+  right: -10px;
+  cursor: e-resize;
+}
+.handle-bl {
+  bottom: -10px;
+  left: -10px;
+  cursor: sw-resize;
+}
+.handle-bm {
+  bottom: -10px;
+  left: 50%;
+  margin-left: -5px;
+  cursor: s-resize;
+}
+.handle-br {
+  bottom: -10px;
+  right: -10px;
+  cursor: se-resize;
+}</style>

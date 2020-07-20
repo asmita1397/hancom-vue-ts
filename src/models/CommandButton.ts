@@ -18,6 +18,7 @@ export const CommandButton = {
   lock: false,
   visible: true,
   wordWrap: true,
+  isActive:false,
   style: {
     left: "20px",
     top: "100px",

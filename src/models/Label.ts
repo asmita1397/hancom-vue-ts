@@ -16,6 +16,7 @@ export const Label = {
   tag: "",
   visible: true,
   wordWrap: true,
+  isActive:false,
   style: {
     left: "70px",
     top: "0px",

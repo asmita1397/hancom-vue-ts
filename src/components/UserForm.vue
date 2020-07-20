@@ -5,7 +5,6 @@
         :style="modal.outerWindowStyle.container"
         :ref="'outrWindowDrag'.concat(modal.name)"
         @mousedown="make(modal)"
-        
       >
         <div :style="modal.outerWindowStyle.top" @mousedown="dragMouseDown($event,modal)">
           <span>Book1 {{modal.name}} (UserForm)</span>
@@ -24,12 +23,11 @@
               :style="modal.innerWindowStyle.closeButton"
               src="https://img.icons8.com/fluent/48/000000/close-window.png"
             />
-          </div> 
+          </div>
           <div
-          @mouseup="handleMouseUp(modal.name)"
+            @mouseup="handleMouseUp(modal.name)"
             :style="modal.innerWindowStyle.innerContainer"
-            @click="createTool($event,modal)"
-            
+            v-on:click.stop="createTool($event,modal)"
           >
             <drag-selector :ref="'dragselector'.concat(modal.name)">
               <UserFormControl :modal="modal" :ref="modal.name" />
@@ -64,7 +62,7 @@ export default class UserForm extends Vue {
   @Getter selectedControl!: any;
   @Getter prevModalZIndex!: any;
   @Getter selectedUserForm!: any;
-
+  @Getter getControlIndex!: any;
 
   @Mutation userFormIndex!: Function;
   @Mutation addControl!: Function;
@@ -73,8 +71,10 @@ export default class UserForm extends Vue {
   @Mutation makeActive!: Function;
   @Mutation updatePrevModalZIndex!: any;
   @Mutation updateSelectedUserForm!: any;
-  @Mutation updateSelect!: any
-  @Mutation resizeUserForm!: any
+  @Mutation updateSelect!: any;
+  @Mutation resizeUserForm!: any;
+  @Mutation activateControl!: any;
+  @Mutation deactivateControl!: any;
 
   positions: any = {
     clientX: "",
@@ -87,46 +87,26 @@ export default class UserForm extends Vue {
     EventBus.$on(
       "selectedControlOption",
       (selectedForm: any, selectedControlOption: any) => {
-        const userFormControlRef: any = this.$refs;
-
-        for (const key in userFormControlRef) {
-          if (
-            key === selectedForm.name &&
-            selectedControlOption.type !== "UserForm"
-          ) {
-            for (
-              let i = 0;
-              i < userFormControlRef[key][0].$children.length;
-              i++
-            ) {
-              if (
-                userFormControlRef[key][0].$children[i].$attrs.id ===
-                selectedControlOption.id
-              ) {
-                userFormControlRef[key][0].$children[i].active = true;
-              } else {
-                userFormControlRef[key][0].$children[i].active = false;
-              }
-            }
-          }
+        if (selectedControlOption.type !== "UserForm") {
+          this.activateControl();
+        } else {
+          this.deactivateControl();
         }
       }
     );
   }
   make(modal: any): void {
-   
     this.userFormIndex(modal);
     this.updatePrevModalZIndex();
     console.log("mak activ");
     this.makeActive(this.prevModalZIndex);
-     this.updateSelect(true);
-    this.updateSelectedUserForm(modal)
+    this.updateSelect(true);
+    this.updateSelectedUserForm(modal);
     EventBus.$emit(
-        "userFormClicked",
-        this.selectedUserForm,
-        this.selectedUserForm
-      );
-
+      "userFormClicked",
+      this.selectedUserForm,
+      this.selectedUserForm
+    );
   }
   dragMouseDown(event: any, modal: any): void {
     this.userFormIndex(modal);
@@ -145,7 +125,6 @@ export default class UserForm extends Vue {
     this.positions.clientX = event.clientX;
     this.positions.clientY = event.clientY;
 
-    
     const top =
       (this as any).$refs[this.modalName][0].offsetTop -
       this.positions.movementY +
@@ -161,14 +140,12 @@ export default class UserForm extends Vue {
     document.onmousemove = null;
   }
 
-
-    onResize(e: any, userForm: object) {
-      console.log(userForm)
-       this.resizeUserForm(e.detail)
-    }
+  onResize(e: any, userForm: object) {
+    /* console.log(userForm) */
+    this.resizeUserForm(e.detail);
+  }
   createTool(e: any, modal: any) {
     this.userFormIndex(modal);
-
     if (this.selectedControl === "label") {
       console.log("labl");
       const tool = {
@@ -233,6 +210,8 @@ export default class UserForm extends Vue {
   handleMouseUp(modal: string) {
     const dragRef = "dragselector".concat(modal);
     this.selectedAreaStyle = (this as any).$refs[dragRef][0].selectAreaStyle;
+    console.log("mouse up");
+    this.deactivateControl();
   }
 }
 </script>
@@ -247,18 +226,15 @@ img {
   padding-right: 45px;
 }
 .drag-selector {
-            display: flex;
-            align-content: flex-start;
-            flex-wrap: wrap;
-            padding: 10px;
-           
-        }
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  padding: 10px;
+}
 .drag-selector1 {
-            display: flex;
-            align-content: flex-start;
-            flex-wrap: wrap;
-            padding: 10px;
-           
-
-        }
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  padding: 10px;
+}
 </style>

@@ -77,6 +77,7 @@ export const mutations: MutationTree<any> =
   },
   updateControlIndex: (state, controlIndex) => {
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls[state.controlIdIndex].style.zIndex = controlIndex.toString()
+
   },
   displayUserForm: (state) => {
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].outerWindowStyle.container.display = "block"
@@ -95,8 +96,29 @@ export const mutations: MutationTree<any> =
   },
   deletingControl: (state) => {
     console.log(state.treeBrowserData.userForms[0].userForms)
-    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.splice(state.controlIdIndex,1)
-  }
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.splice(state.controlIdIndex, 1)
+  },
+  activateControl: (state) => {
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.map((val: any,index: number)=>{
+         if(index===state.controlIdIndex)
+         {
+          val.isActive= true
+         }
+         else
+         {
+          val.isActive= false
+         }
+    })
+  },
+  deactivateControl:(state) => {
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.map((val: any,index: number)=>{
+     if(val.isActive=== true)
+     {
+       val.isActive=false
+     }
+    })
+  },
+  
 
 
 }

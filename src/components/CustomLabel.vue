@@ -10,6 +10,7 @@
       :tabindex="control.tabindex"
       :style="control.style"
       @mousedown="customLabelClick"
+      @mouseup.stop
       :v-model="control.caption"
       :value="control.caption"
       :disabled="!control.enabled"
@@ -34,6 +35,7 @@ export default class CustomLabel extends Vue {
   @Mutation updatePrevControlIndex!: Function;
   @Mutation controlIndex!: Function;
   @Mutation updateControlIndex!: Function;
+  @Mutation activateControl!: Function
 
   customLabelClick() {
     console.log("clickd");
@@ -41,13 +43,11 @@ export default class CustomLabel extends Vue {
     this.controlIndex(this.control);
     this.updatePrevControlIndex();
     this.updateControlIndex(this.getPrevControlIndex);
+    this.activateControl()
     EventBus.$emit("userFormClicked", this.control, this.modal);
   }
 }
 </script>
 <style scoped>
-/* .lbl:focus {
-  outline: none;
-  box-shadow: none;
-} */
+
 </style>

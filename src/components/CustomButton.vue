@@ -5,6 +5,7 @@
       :id="control.id"
       :key="control.id"
       @mousedown="customButtonClick"
+      @mouseup.stop
       :style="control.style"
       :title="control.title"
       :tabindex="control.tabindex"
@@ -17,12 +18,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Getter, Mutation } from 'vuex-class';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { Getter, Mutation } from "vuex-class";
 import { EventBus } from "./event-bus";
-@Component({
-    
-  })
+@Component({})
 export default class CustomLabel extends Vue {
   @Prop() private control!: object;
   @Prop() private modal!: object;
@@ -31,13 +30,15 @@ export default class CustomLabel extends Vue {
   @Mutation userFormIndex!: Function;
   @Mutation updatePrevControlIndex!: Function;
   @Mutation controlIndex!: Function;
-  @Mutation updateControlIndex!: Function
+  @Mutation updateControlIndex!: Function;
+  @Mutation activateControl!: Function;
   customButtonClick() {
     console.log("clickd");
     this.userFormIndex(this.modal);
     this.controlIndex(this.control);
     this.updatePrevControlIndex();
     this.updateControlIndex(this.getPrevControlIndex);
+    this.activateControl()
     EventBus.$emit("userFormClicked", this.control, this.modal);
   }
 }

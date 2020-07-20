@@ -15,10 +15,11 @@
       v-for="handle in actualHandles"
       :key="handle"
       :class="[classNameHandle, classNameHandle + '-' + handle]"
-      :style="{display: enabled ? 'block' : 'none'}"
       @mousedown.stop.prevent="handleDown(handle, $event)"
       @touchstart.stop.prevent="handleTouchDown(handle, $event)"
+       
     >
+   <!--  :style="{display: enabled ? 'block' : 'none'}" -->
      <!--  <slot :name="handle"></slot> -->
     </div>
     <slot></slot>
