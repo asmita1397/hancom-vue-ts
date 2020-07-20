@@ -6,5 +6,4 @@ declare module '*.vue' {
 
 declare module 'vue-draggable-resizable'
 declare module 'vue-element-resize-detector'
-declare module 'vue-drag-selector'
 declare module 'vue-resizable'

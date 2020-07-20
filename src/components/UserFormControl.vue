@@ -4,7 +4,7 @@
       <template>
         <!--   -->
         <vue-draggable-resizable
-           :class-name-handle="control.isActive?'handle':''"
+          :class-name-handle="control.isActive?'handle':''"
           :style="{zIndex:control.style.zIndex}"
           v-for="control in modal.controls"
           :key="control.id"
@@ -19,8 +19,10 @@
           @deactivated="onDeactivated"
           @activated="onActivated(modal,control)"
         >
-          <CustomLabel v-if="control.type==='Label'" :control="control" :modal="modal" />
-          <CustomButton v-if="control.type==='CommandButton'" :control="control" :modal="modal" />
+          <drag-selector-item :value="control">
+            <CustomLabel v-if="control.type==='Label'" :control="control" :modal="modal" />
+            <CustomButton v-if="control.type==='CommandButton'" :control="control" :modal="modal" />
+          </drag-selector-item>
         </vue-draggable-resizable>
       </template>
     </div>
@@ -33,12 +35,14 @@ import CustomButton from "./CustomButton.vue";
 import VueDraggableResizable from "./vue-draggable-resizable.vue";
 import { Mutation, Getter } from "vuex-class";
 import { EventBus } from "./event-bus";
+import DragSelectorItem from "./DragSelectorItem.vue";
 
 @Component({
   components: {
     CustomLabel,
     CustomButton,
-    VueDraggableResizable
+    VueDraggableResizable,
+    DragSelectorItem
   }
 })
 export default class UserFormControl extends Vue {
@@ -128,7 +132,7 @@ export default class UserFormControl extends Vue {
   position: absolute;
   width: 10px;
   height: 10px;
-  background: #EEE;
+  background: #eee;
   border: 1px solid #333;
 }
 .handle-tl {
@@ -174,4 +178,5 @@ export default class UserFormControl extends Vue {
   bottom: -10px;
   right: -10px;
   cursor: se-resize;
-}</style>
+}
+</style>

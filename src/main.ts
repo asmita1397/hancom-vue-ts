@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
 
-import VueDragSelector from "vue-drag-selector"
+
 import resize from 'vue-element-resize-detector'
 import VueDraggableResizable from 'vue-draggable-resizable'
 import VueResizable from 'vue-resizable'
@@ -13,7 +13,7 @@ import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
  Vue.use(resize)
-Vue.use(VueDragSelector);
+
 Vue.use(VueResizable)
 Vue.config.productionTip = false
 

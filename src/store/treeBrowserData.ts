@@ -99,26 +99,35 @@ export const mutations: MutationTree<any> =
     state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.splice(state.controlIdIndex, 1)
   },
   activateControl: (state) => {
-    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.map((val: any,index: number)=>{
-         if(index===state.controlIdIndex)
-         {
-          val.isActive= true
-         }
-         else
-         {
-          val.isActive= false
-         }
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.map((val: any, index: number) => {
+      if (index === state.controlIdIndex) {
+        val.isActive = true
+      }
+      else {
+        val.isActive = false
+      }
     })
   },
-  deactivateControl:(state) => {
-    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.map((val: any,index: number)=>{
-     if(val.isActive=== true)
-     {
-       val.isActive=false
-     }
+  deactivateControl: (state) => {
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.map((val: any) => {
+      if (val.isActive === true) {
+        val.isActive = false
+      }
     })
   },
-  
+  dragSelectedControls: (state, contolList) => {
+    state.treeBrowserData.userForms[0].userForms[state.useFormIdIndex].controls.map((val: any) => {
+      val.isActive= false
+      contolList.map((control: any) => {
+        if (control.id === val.id) {
+          val.isActive = true
+        }
+        
+      }
+      )
+    })
+  },
+
 
 
 }

@@ -28,8 +28,14 @@
             @mouseup="handleMouseUp(modal.name)"
             :style="modal.innerWindowStyle.innerContainer"
             v-on:click.stop="createTool($event,modal)"
+            @mousedown="handleDeactivate"
           >
-            <drag-selector :ref="'dragselector'.concat(modal.name)">
+            <drag-selector
+              :ref="'dragselector'.concat(modal.name)"
+              v-model="checkedList"
+              @change="handleDragSelectorChange"
+              class="drag-selector"
+            >
               <UserFormControl :modal="modal" :ref="modal.name" />
             </drag-selector>
           </div>
@@ -46,11 +52,13 @@ import { Component, Vue } from "vue-property-decorator";
 import { State, Getter, Mutation } from "vuex-class";
 import UserFormControl from "./UserFormControl.vue";
 import OuterWindowButton from "./OuterWindowButton.vue";
+import DragSelector from "./DragSelector.vue";
 import { EventBus } from "./event-bus";
 @Component({
   components: {
     UserFormControl,
-    OuterWindowButton
+    OuterWindowButton,
+    DragSelector
   }
 })
 export default class UserForm extends Vue {
@@ -75,6 +83,8 @@ export default class UserForm extends Vue {
   @Mutation resizeUserForm!: any;
   @Mutation activateControl!: any;
   @Mutation deactivateControl!: any;
+  @Mutation controlIndex!: any;
+  @Mutation dragSelectedControls!: any
 
   positions: any = {
     clientX: "",
@@ -82,7 +92,7 @@ export default class UserForm extends Vue {
     movementX: 0,
     movementY: 0
   };
-
+checkedList =[]
   mounted() {
     EventBus.$on(
       "selectedControlOption",
@@ -94,6 +104,19 @@ export default class UserForm extends Vue {
         }
       }
     );
+  }
+
+  handleDragSelectorChange(list: any) {
+   /* for (const val in list) {
+      console.log(list[val])
+      this.controlIndex(list[val])
+      this.dragSelectedControls()
+   }
+ */
+  }
+  handleDeactivate()
+  {
+      this.checkedList=[]
   }
   make(modal: any): void {
     this.userFormIndex(modal);
@@ -210,8 +233,20 @@ export default class UserForm extends Vue {
   handleMouseUp(modal: string) {
     const dragRef = "dragselector".concat(modal);
     this.selectedAreaStyle = (this as any).$refs[dragRef][0].selectAreaStyle;
+
+    /* for (const val in this.checkedList) {
+      console.log( this.checkedList[val])
+      this.controlIndex( this.checkedList[val])
+      console.log(this.getControlIndex)
+      
+   } */
+   this.dragSelectedControls(this.checkedList)
     console.log("mouse up");
-    this.deactivateControl();
+    if(this.selectedAreaStyle.width === "0px")
+    {
+        this.deactivateControl();
+    }
+     
   }
 }
 </script>
