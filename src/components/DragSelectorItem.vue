@@ -1,5 +1,5 @@
 <template>
-    <div @mousedown.stop
+    <div @mousedown.prevent
          @mouseup.stop
          @click="handleClick"
          :class="['drag-selector-item-wrapper', selected ? 'selected':'']">
